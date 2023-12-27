@@ -38,7 +38,7 @@ class Application():
         check_box.pack(padx= 0, pady= 10)
 
         def clique_login():
-            msg= messagebox.showinfo(title= "Estado do Login", message= "Usuário encontrado.")
+            print("funcionando")
 
         login_button = ctk.CTkButton(login_frame, text= "Login", command= clique_login)
         login_button.pack(padx=10, pady=10)
@@ -65,6 +65,9 @@ class Application():
 
             confirmar_senha= ctk.CTkEntry(register_frame, placeholder_text= "Confirmar senha", show= "*")
             confirmar_senha.pack(padx= 10, pady= 7)
+
+            if senha_entry != confirmar_senha:
+                messagebox.showerror(title= "Estado do Cadastro", message= "Senha incorreta, tente novamente")    
 
             check_box= ctk.CTkCheckBox(register_frame, text= "Aceito todos os termos e condições")
             check_box.pack(padx= 10, pady= 7)
