@@ -1,5 +1,5 @@
-from janela import login_entry, senha_entry, email_entry
-import database
+from modulos.janela import login_entry, senha_entry, email_entry
+import modulos.database as database
 
 
 database.cursor.execute("""
