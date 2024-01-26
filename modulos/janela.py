@@ -43,7 +43,7 @@ class Application():
         login_frame.pack(padx=10, pady=10)
 
     #adiciona label
-        texto = ctk.CTkLabel(login_frame, text="Bem-vindo ao Sistema de Gerenciamento de Bibliotecas!", font=("Roboto", 15))
+        texto = ctk.CTkLabel(login_frame, text="Bem vindo ao BookPy!", font=("Roboto", 15))
         texto.pack(padx=10, pady=10)
 
         usuario_label = ctk.CTkLabel(login_frame, text="Usuário:")
