@@ -2,26 +2,30 @@ import sqlite3
 
 def insert_into_database(login, email, senha):
     try:
-        # Conecta ao banco de dados
-        with sqlite3.connect("modulos\\SistemaDeBiblioteca.db") as connection:
-            # Cria um cursor a partir da conexão
+        with sqlite3.connect("modulos\\Bookpy.db") as connection:
             cursor = connection.cursor()
 
-            # Executa a operação no banco de dados
-            cursor.execute("INSERT INTO users (Username, Email, Password) VALUES (?, ?, ?)", (login, email, senha))
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS users(         
+                Id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                Username TEXT NOT NULL,
+                Email TEXT NOT NULL,
+                Password TEXT NOT NULL     
+            )""")
 
-            # Executa uma consulta SQL
-            cursor.execute("SELECT * FROM users")
-
-            # Recupera todos os resultados da consulta
+            cursor.execute("SELECT Email FROM users")
             resultados = cursor.fetchall()
 
-            # Imprime os resultados
             for linha in resultados:
-                print(linha)
-
+                if email != linha:
+                    continue
+                else:
+                    return "E-mail já cadastrado"
+            cursor.execute("INSERT INTO users (Username, Email, Password) VALUES (?, ?, ?)", (login, email, senha))
+            
             # Commit para salvar as alterações
             connection.commit()
+            return("Usuário cadastrado com sucesso!")
 
     except sqlite3.Error as e:
         print(f"Erro ao inserir dados no banco de dados: {e}")
