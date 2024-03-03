@@ -10,7 +10,8 @@ def login(usuario, senha):
 
             for linha in dados:
                 if usuario == linha[0] and senha == linha[1]:    
-                    return "Usuário cadastrado"
+                    connection.commit()
+                    return "Usuário encontrado!"
                 else:
                     continue
 
