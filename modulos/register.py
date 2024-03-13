@@ -17,7 +17,7 @@ def insert_into_database(login, email, senha):
             resultados = cursor.fetchall()
 
             for linha in resultados:
-                if email != linha:
+                if email != linha[0]:
                     continue
                 else:
                     return "E-mail já cadastrado"
