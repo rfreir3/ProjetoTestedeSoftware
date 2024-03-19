@@ -2,7 +2,7 @@ import sqlite3
 
 def insert_into_database(login, email, senha):
     try:
-        with sqlite3.connect("modulos\\Bookpy.db") as connection:
+        with sqlite3.connect("BookpyLogin.db") as connection:
             cursor = connection.cursor()
 
             cursor.execute("""
