@@ -14,7 +14,7 @@ janela = ctk.CTk()
 
 class Application():
     def __init__(self):
-        self.janela = janela 
+        self.janela = janela
         self.tema()
         self.tela()
         self.tela_login()
@@ -24,15 +24,14 @@ class Application():
         ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("dark-blue")
 
-    def tela(self, tamanho = "430x300"):
+    def tela(self, tamanho = "430x330"):
         janela.geometry(tamanho)
         janela.title("BookPy")
         janela.maxsize(1000, 1000)
         janela.minsize(300, 200)
         janela.resizable(False, False)
 
-    def tela_login(self):
-
+    def tela_login(self):        
         def clique_register():
 
             def tela_back(frame_forget, frame_pack, tam):
@@ -41,7 +40,6 @@ class Application():
                 frame_pack.pack(padx= 10, pady= 10)
 
             def read_terms():
-
                 register_frame.pack_forget()
 
                 terms_frame= ctk.CTkFrame(janela)
@@ -116,8 +114,17 @@ class Application():
             save_button= ctk.CTkButton(register_frame, text= "Cadastrar-se", command= save_user)
             save_button.pack(padx= 10, pady= 7)
 
-            back_button= ctk.CTkButton(register_frame, text= "Voltar à área de login", command= lambda: tela_back(register_frame, login_frame, tam= "430x300"))
+            back_button= ctk.CTkButton(register_frame, text= "Voltar à área de login", command= lambda: tela_back(register_frame, login_frame, tam= "430x330"))
             back_button.pack(padx= 10, pady= 7)
+
+        def clique_login():
+            result = login(login_entry.get(), senha_entry.get(), email_entry.get())
+            messagebox.showinfo(title= "Estado de Login", message= result)
+            if(result == "Usuário encontrado!"):
+                janela.destroy()
+                from profile import User
+                User(login_entry.get(), senha_entry.get(), email_entry.get())
+                import profile
 
         login_frame = ctk.CTkFrame(janela)
         login_frame.pack(padx=10, pady=10)
@@ -125,10 +132,14 @@ class Application():
             
         texto = ctk.CTkLabel(login_frame, text= "Entre na sua conta BookPy!", font=("Roboto", 15))
         texto.pack(padx= 10, pady= 10)
-            
+        
         login_entry = ctk.CTkEntry(login_frame, placeholder_text= "Login")
         login_entry.pack(padx=10, pady=10)
         login_entry.configure(width= 400, height= 50)
+
+        email_entry = ctk.CTkEntry(login_frame, placeholder_text= "E-mail")
+        email_entry.pack(padx=10, pady=10)
+        email_entry.configure(width= 400, height= 50)
         
         senha_entry = ctk.CTkEntry(login_frame, placeholder_text= "Senha", show= "*")
         senha_entry.pack(padx= 10, pady= 10)
@@ -138,17 +149,10 @@ class Application():
         check_box.pack(padx=10, pady=10)
 
         register_button = ctk.CTkButton(login_frame, text= "Cadastre-se", command= clique_register)
-        register_button.place(x=310, y= 190)
+        register_button.place(x=300, y= 260)
         register_button.configure(width=100, height=35)
     
-        def clique_login():
-            result = login(login_entry.get(), senha_entry.get())
-            messagebox.showinfo(title= "Estado de Login", message= result)
-            if(result == "Usuário encontrado!"):
-                janela.destroy()
-                import profile
-
         login_button = ctk.CTkButton(login_frame, text= "Login", command= clique_login)
-        login_button.place(x=10, y=190)
+        login_button.place(x=10, y=260)
         login_button.configure(width=100, height=35)   
 Application()
