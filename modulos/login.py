@@ -1,17 +1,18 @@
 import sqlite3
 
-def login(usuario, senha):
+def login(usuario, senha, email):
     try:
         with sqlite3.connect("BookpyLogin.db") as connection:
             cursor = connection.cursor()
 
-            cursor.execute("SELECT Username, Password FROM users")
+            cursor.execute("SELECT Username, Password, Email FROM users")
             dados = cursor.fetchall()
 
             for linha in dados:
-                if usuario == linha[0] and senha == linha[1]:    
+                if usuario == linha[0] and senha == linha[1] and email == linha[2]:    
                     connection.commit()
                     return "Usuário encontrado!"
+                
                 else:
                     continue
 
